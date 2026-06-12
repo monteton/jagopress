@@ -1,0 +1,37 @@
+{
+    "name": "FitFlow — Скульптор",
+    "short_name": "FitFlow",
+    "description": "Тренировки на ягодицы и пресс от Натальи Макаренко",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#232220",
+    "theme_color": "#232220",
+    "orientation": "portrait",
+    "lang": "ru",
+    "icons": [
+        {
+            "src": "./images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

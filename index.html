@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>FitFlow — Скульптор: Ягодицы и Пресс</title>
+    <meta name="description" content="Тренировки на ягодицы и пресс от Натальи Макаренко. Без зала, без опыта, результат уже через 30 дней." />
+
+    <!-- PWA мета-теги -->
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#232220" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="FitFlow" />
+    <link rel="apple-touch-icon" href="./images/apple-touch-icon.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'app-bg': '#cfc7b8',
+              'card-bg': '#fefdfb',
+              'dark-charcoal': '#232220',
+              'text-secondary': '#6B7280',
+              'accent-purple': '#f0c7ff',
+              'accent-green': '#e7fcbb',
+              'accent-beige': '#d5cdbe',
+            },
+            borderRadius: {
+              '4xl': '2rem',
+              '5xl': '2.5rem',
+            },
+            animation: {
+              'ken-burns': 'ken-burns 20s ease-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              'ken-burns': {
+                '0%': { transform: 'scale(1) translate(0, 0)' },
+                '50%': { transform: 'scale(1.1) translate(-2%, 2%)' },
+                '100%': { transform: 'scale(1) translate(0, 0)' },
+              },
+            }
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="./index.css">
+
+    <style>
+      /* ===== PWA Install Banner ===== */
+      .install-banner {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(160deg, #1a1820 0%, #232220 50%, #1c1e1a 100%);
+        color: #fff;
+        padding: env(safe-area-inset-top, 2rem) 1.5rem env(safe-area-inset-bottom, 2rem);
+        padding-top: max(env(safe-area-inset-top, 0px), 2rem);
+        padding-bottom: max(env(safe-area-inset-bottom, 0px), 2rem);
+        z-index: 99999;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      .install-banner.show { display: flex; }
+
+      .install-banner-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+      }
+      .install-banner-icon {
+        width: 96px;
+        height: 96px;
+        border-radius: 22px;
+        box-shadow: 0 0 40px rgba(198, 129, 244, 0.4), 0 8px 32px rgba(0,0,0,0.5);
+      }
+      .install-banner-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+      .install-banner-subtitle {
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.65);
+        margin: 0.25rem 0 0;
+        max-width: 280px;
+        line-height: 1.5;
+      }
+
+      .install-banner-btn {
+        padding: 1rem 2.5rem;
+        background: linear-gradient(90deg, #c681f4 0%, #d38080 50%, #e7fcbb 100%);
+        background-size: 200% auto;
+        color: #1a1820;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.05rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: background-position 0.4s, transform 0.15s;
+        min-width: 220px;
+        box-shadow: 0 4px 24px rgba(198, 129, 244, 0.35);
+      }
+      .install-banner-btn:hover {
+        background-position: right center;
+        transform: scale(1.03);
+      }
+      .install-banner-btn:active { transform: scale(0.97); }
+
+      /* iOS Steps */
+      .ios-guide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        max-width: 320px;
+        width: 100%;
+      }
+      .ios-steps-list {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 20px;
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: left;
+        width: 100%;
+      }
+      .ios-step {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+      .ios-step-num {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, #c681f4, #d38080);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        flex-shrink: 0;
+        font-size: 0.85rem;
+      }
+      .ios-arrow-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        opacity: 0.8;
+      }
+      .ios-arrow-label {
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.6);
+      }
+      .ios-bounce-arrow {
+        font-size: 2.5rem;
+        animation: ios-bounce 1.4s ease-in-out infinite;
+        display: block;
+      }
+      @keyframes ios-bounce {
+        0%, 100% { transform: translateY(0); opacity: 1; }
+        50%       { transform: translateY(10px); opacity: 0.6; }
+      }
+      .install-url-box {
+        width: 100%;
+        max-width: 320px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 12px;
+        padding: 0.7rem 1rem;
+        color: #c681f4;
+        font-size: 0.8rem;
+        font-family: monospace;
+        text-align: center;
+        user-select: all;
+        outline: none;
+      }
+      .install-hint-text {
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.5);
+        max-width: 280px;
+        line-height: 1.5;
+      }
+      /* Декоративный blur-шар */
+      .install-glow {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(198, 129, 244, 0.12) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body class="bg-dark-charcoal">
+
+    <!-- ===== PWA Install Banner ===== -->
+    <div class="install-banner" id="installBanner">
+      <div class="install-glow"></div>
+
+      <div class="install-banner-header">
+        <img src="./images/icon-192.png" alt="FitFlow Icon" class="install-banner-icon">
+        <div>
+          <p class="install-banner-title" id="installTitle">Установите приложение</p>
+          <p class="install-banner-subtitle" id="installSubtitle">Быстрый доступ с экрана «Домой»</p>
+        </div>
+      </div>
+
+      <button class="install-banner-btn" id="installBtn">Установить</button>
+      <div id="installSteps" style="width:100%;max-width:360px;"></div>
+    </div>
+    <!-- ===== /PWA Install Banner ===== -->
+
+    <div class="relative h-screen w-screen max-w-2xl mx-auto overflow-hidden">
+        <!-- Фоновое изображение с анимацией -->
+        <div class="absolute inset-0">
+            <img src="./images/natali.JPG" alt="Background" class="w-full h-full object-cover animate-ken-burns">
+        </div>
+
+        <!-- Градиент для затемнения -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+
+        <!-- Контент -->
+        <div class="relative z-10 flex flex-col items-center justify-end h-full p-8 text-center text-white">
+            <h1 class="text-4xl font-bold drop-shadow-lg mb-">СКУЛЬПТОР</h1>
+            <p class="text-lg mb-10 drop-shadow-md">ЯГОДИЦЫ И ПРЕСС</p>
+            <p class="text-lg mb-8 drop-shadow-md">Ваш путь к идеальной фигуре начинается здесь</p>
+            <a href="./main.html" class="w-full max-w-xs bg-[#e7fcbb] text-dark-charcoal font-bold py-4 px-8 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 animate-pulse-slow">
+                Старт
+            </a>
+        </div>
+    </div>
+
+    <script>
+      // ===== Регистрация Service Worker =====
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('[PWA] SW зарегистрирован:', reg.scope))
+            .catch(err => console.warn('[PWA] SW ошибка:', err));
+        });
+      }
+
+      // ===== PWA Install Banner Logic =====
+      (function () {
+        const banner    = document.getElementById('installBanner');
+        const btn       = document.getElementById('installBtn');
+        const stepsEl   = document.getElementById('installSteps');
+        const titleEl   = document.getElementById('installTitle');
+        const subtitleEl = document.getElementById('installSubtitle');
+
+        // Уже установлено — не показываем
+        if (
+          window.matchMedia('(display-mode: standalone)').matches ||
+          navigator.standalone === true
+        ) return;
+
+        const ua = navigator.userAgent || '';
+        const isIOS     = /iPad|iPhone|iPod/.test(ua) ||
+                          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const isAndroid = /Android/i.test(ua);
+
+        // ⚠️ Telegram iOS не пишет "Telegram" в UA! Используем Version/ для определения Safari
+        const isTelegramProxy  = typeof window.TelegramWebviewProxy !== 'undefined';
+        const isTelegram       = /Telegram/i.test(ua) || isTelegramProxy;
+        const isInstagram      = /Instagram/i.test(ua);
+        const isFacebook       = /FBAN|FBAV/i.test(ua);
+        const isVK             = /VKAndroidApp|vk_app/i.test(ua);
+        const isIOSWebViewByUA = isIOS && /Safari/i.test(ua) && !/Version\//i.test(ua);
+        const isWebView        = isTelegram || isInstagram || isFacebook || isVK ||
+                                 /\bwv\b/.test(ua) || isIOSWebViewByUA;
+
+        const isChrome = /Chrome/i.test(ua) &&
+                         !/OPR|Opera|Edge|Edg|Samsung|UCBrowser|YaBrowser/i.test(ua) &&
+                         !isWebView;
+        // Настоящий Safari: есть Version/, нет других браузеров
+        const isSafari = /Safari/i.test(ua) && /Version\//i.test(ua) &&
+                         !/Chrome|CriOS|FxiOS|OPiOS|mercury|UCBrowser|YaBrowser/i.test(ua) &&
+                         !isWebView;
+
+        let deferredPrompt = null;
+        let bannerShown    = false;
+
+        // Android Chrome / Desktop Chrome — ждём нативный промпт
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          showBanner('native');
+        });
+
+        // iOS и WebView — показываем баннер сразу
+        if      (isWebView)           showBanner('webview');
+        else if (isIOS && isSafari)   showBanner('ios-safari');
+        else if (isIOS && !isSafari)  showBanner('ios-other');
+
+        // Android/Desktop — ждём beforeinstallprompt 500мс
+        if (!bannerShown) {
+          setTimeout(() => {
+            if (bannerShown) return;
+            if (isAndroid && !deferredPrompt) showBanner('android-other');
+            else if (!isAndroid && !isIOS && !deferredPrompt) {
+              showBanner(isChrome ? 'desktop-chrome' : 'desktop-other');
+            }
+          }, 500);
+        }
+
+        function getBrowserName() {
+          if (isTelegram)  return 'Telegram';
+          if (isInstagram) return 'Instagram';
+          if (isFacebook)  return 'Facebook';
+          if (isVK)        return 'ВКонтакте';
+          return 'этот браузер';
+        }
+
+        function openInChrome() {
+          const url = new URL(window.location.href);
+          window.location.href = 'intent://' + url.host + url.pathname + url.search + url.hash +
+            '#Intent;scheme=https;package=com.android.chrome;end';
+        }
+
+        function openInSafari() {
+          window.location.href = window.location.href
+            .replace(/^https:\/\//, 'x-safari-https://')
+            .replace(/^http:\/\//, 'x-safari-http://');
+        }
+
+        function showBanner(mode) {
+          if (bannerShown) return;
+          bannerShown = true;
+          banner.classList.add('show');
+
+          const currentUrl = window.location.href;
+          const browserName = getBrowserName();
+
+          if (mode === 'native') {
+            titleEl.textContent     = 'Установите приложение';
+            subtitleEl.textContent  = 'Быстрый доступ с экрана «Домой»';
+            btn.textContent         = '⚡ Установить';
+            btn.style.display       = 'inline-block';
+            btn.onclick = async () => {
+              if (!deferredPrompt) return;
+              deferredPrompt.prompt();
+              const { outcome } = await deferredPrompt.userChoice;
+              if (outcome === 'accepted') banner.classList.remove('show');
+              deferredPrompt = null;
+            };
+
+          } else if (mode === 'ios-safari') {
+            // Пользователь уже в Safari — объясняем как добавить
+            titleEl.textContent    = '⚠️ Нужна установка!';
+            subtitleEl.textContent = 'Для правильной работы приложения';
+            btn.style.display      = 'none';
+            stepsEl.innerHTML = `
+              <div class="ios-guide">
+                <div class="ios-steps-list">
+                  <div class="ios-step">
+                    <div class="ios-step-num">1</div>
+                    <span>Нажмите
+                      <svg style="display:inline;vertical-align:middle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                        <polyline points="16 6 12 2 8 6"/>
+                        <line x1="12" y1="2" x2="12" y2="15"/>
+                      </svg>
+                      <b>Поделиться</b> — кнопка внизу экрана</span>
+                  </div>
+                  <div class="ios-step">
+                    <div class="ios-step-num">2</div>
+                    <span>Прокрутите вниз, найдите<br><b>«На экран «Домой»»</b></span>
+                  </div>
+                  <div class="ios-step">
+                    <div class="ios-step-num">3</div>
+                    <span>Нажмите <b>«Добавить»</b> — готово! 🎉</span>
+                  </div>
+                </div>
+                <div class="ios-arrow-wrap">
+                  <span class="ios-arrow-label">кнопка «Поделиться» внизу</span>
+                  <span class="ios-bounce-arrow">↓</span>
+                </div>
+              </div>`;
+
+          } else if (mode === 'ios-other' || (mode === 'webview' && isIOS)) {
+            titleEl.textContent    = 'Требуется Safari';
+            subtitleEl.textContent = 'Из ' + browserName + ' установить нельзя. Нужен Safari.';
+            btn.textContent        = '🧭 Открыть в Safari';
+            btn.style.display      = 'inline-block';
+            stepsEl.innerHTML      =
+              '<p class="install-hint-text">Нажмите кнопку — откроется Safari.<br>' +
+              'Если не сработало, скопируйте ссылку вручную:</p>' +
+              '<input readonly class="install-url-box" value="' + currentUrl + '">';
+            btn.onclick = () => openInSafari();
+
+          } else if (mode === 'android-other' || (mode === 'webview' && isAndroid)) {
+            titleEl.textContent    = 'Откройте в Chrome';
+            subtitleEl.textContent = browserName + ' не поддерживает установку';
+            btn.textContent        = '🌐 Открыть в Chrome';
+            btn.style.display      = 'inline-block';
+            stepsEl.innerHTML      =
+              '<p class="install-hint-text">В Chrome появится кнопка <b>«Установить»</b> — нажмите её!</p>';
+            btn.onclick = () => openInChrome();
+
+          } else if (mode === 'desktop-chrome') {
+            titleEl.textContent    = 'Установите приложение';
+            subtitleEl.textContent = 'Нажмите кнопку установки в адресной строке';
+            btn.style.display      = 'none';
+            stepsEl.innerHTML      =
+              '<p class="install-hint-text">Найдите иконку <b style="font-size:1.1em">⊕</b> в правой части адресной строки Chrome и нажмите её</p>';
+
+          } else if (mode === 'desktop-other') {
+            titleEl.textContent    = 'Откройте сайт в Chrome';
+            subtitleEl.textContent = 'Для установки как приложение нужен Chrome';
+            btn.textContent        = '📋 Скопировать ссылку';
+            btn.style.display      = 'inline-block';
+            btn.onclick = () => {
+              navigator.clipboard.writeText(currentUrl).then(() => {
+                btn.textContent = '✓ Скопировано!';
+                setTimeout(() => { btn.textContent = '📋 Скопировать ссылку'; }, 2500);
+              });
+            };
+          }
+        }
+      })();
+    </script>
+
+  </body>
+</html>

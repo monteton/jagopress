@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Как установить приложение «Питание»</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dcdcdc;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .mobile-frame {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            background-color: #F9F4F2;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 10px 16px 100px;
+            flex-grow: 1;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            color: #222;
+        }
+
+        main::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 20px 10px 24px;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            margin-bottom: 14px;
+        }
+
+        .hero-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 6px;
+            color: #1a1a1a;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ===== TAB SWITCHER ===== */
+        .tab-switcher {
+            display: flex;
+            background: #e8e3e0;
+            border-radius: 12px;
+            padding: 4px;
+            margin: 0 4px 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 8px;
+            border: none;
+            border-radius: 10px;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn.active {
+            background: #fff;
+            color: #1a1a1a;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .tab-btn i {
+            font-size: 18px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ===== STEPS ===== */
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 16px;
+            padding: 0 4px;
+        }
+
+        .step-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            background: #b4f24c;
+            color: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .step-body {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 6px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .step-text b {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .step-visual {
+            margin-top: 12px;
+            background: #f6f3f1;
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .step-visual i {
+            font-size: 24px;
+            color: #b4f24c;
+            flex-shrink: 0;
+        }
+
+        .step-visual.highlight {
+            background: linear-gradient(135deg, #f4ffe3, #e8ffc4);
+            border: 1px solid rgba(180, 242, 76, 0.25);
+        }
+
+        /* ===== EMOJI ICONS ===== */
+        .icon-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .icon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .icon-badge i {
+            color: #b4f24c;
+        }
+
+        /* ===== IMPORTANT NOTE ===== */
+        .note-card {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            color: #fff;
+            border-radius: 18px;
+            padding: 20px;
+            margin: 20px 0 14px;
+        }
+
+        .note-card .note-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note-card .note-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .note-card b {
+            color: #b4f24c;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-section {
+            margin-top: 24px;
+        }
+
+        .faq-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 18px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .faq-q {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 6px;
+        }
+
+        .faq-a {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ===== BOTTOM NAV ===== */
+        footer {
+            flex-shrink: 0;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-top: 1px solid #E5E5EA;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 66px;
+            width: 100%;
+            max-width: 430px;
+            padding-top: 10px;
+            padding-bottom: calc(20px + env(safe-area-inset-bottom));
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
+            border-radius: 18px 18px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8A8A8E;
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: #b4f24c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mobile-frame">
+        <header>
+            <a href="main.html" class="back-button" aria-label="Назад">
+                <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <h1>Как установить</h1>
+        </header>
+
+        <main>
+            <!-- Hero -->
+            <div class="hero">
+                <img src="icon-192.png" alt="Питание" class="hero-icon">
+                <p class="hero-title">Установите приложение «Питание»</p>
+                <p class="hero-subtitle">Быстрый доступ с главного экрана — без App Store и Google Play</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="tab-switcher">
+                <button class="tab-btn active" onclick="switchTab('android')" id="tabAndroid">
+                    <i class="fa-brands fa-android"></i> Android
+                </button>
+                <button class="tab-btn" onclick="switchTab('ios')" id="tabIOS">
+                    <i class="fa-brands fa-apple"></i> iPhone
+                </button>
+            </div>
+
+            <!-- ==================== ANDROID ==================== -->
+            <div class="tab-content active" id="contentAndroid">
+                <p class="section-title">Установка на Android</p>
+
+                <!-- Шаг 1 -->
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-body">
+                        <p class="step-title">Откройте ссылку в Google Chrome</p>
+                        <p class="step-text">
+                            Если вы получили ссылку в <b>Telegram</b>, <b>ВКонтакте</b> или <b>Instagram</b> —
+                            нажмите на три точки <b>⋮</b> в правом верхнем углу и выберите <b>«Открыть в Chrome»</b>
+                            или <b>«Открыть в браузере»</b>.
+                        </p>
+                        <div class="step-visual">
+                            <i class="fa-brands fa-chrome"></i>
+                            <span>Приложение открывается <b>только через Chrome</b></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 2 -->
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-body">
+                        <p class="step-title">Дождитесь всплывающего окна</p>
+                        <p class="step-text">
+                            Внизу экрана появится баннер с кнопкой <b>«Установить»</b>.
+                            Нажмите на неё.
+                        </p>
+                        <div class="step-visual highlight">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Появится кнопка <b>«Установить»</b></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 3 -->
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-body">
+                        <p class="step-title">Подтвердите установку</p>
+                        <p class="step-text">
+                            Chrome покажет системное окно — нажмите <b>«Установить»</b>.
+                            Приложение появится на главном экране вашего телефона.
+                        </p>
+                        <div class="icon-row">
+                            <span class="icon-badge"><i class="fa-solid fa-check"></i> Готово!</span>
+                            <span class="icon-badge"><i class="fa-solid fa-mobile-screen"></i> На экране «Домой»</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Если нет баннера -->
+                <div class="note-card">
+                    <p class="note-title">⚡ Баннер не появился?</p>
+                    <p class="note-text">
+                        Нажмите на <b>три точки ⋮</b> в правом верхнем углу Chrome → найдите пункт
+                        <b>«Установить приложение»</b> или <b>«Добавить на главный экран»</b> и нажмите на него.
+                    </p>
+                </div>
+
+                <!-- FAQ Android -->
+                <div class="faq-section">
+                    <p class="section-title">Частые вопросы (Android)</p>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Обязательно Chrome? А если у меня Яндекс Браузер / Opera / Samsung?</p>
+                        <p class="faq-a">Да, для установки нужен именно <b>Google Chrome</b>. Другие браузеры на Android
+                            не поддерживают установку приложений. Chrome обычно уже установлен на телефоне.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Это безопасно? Это не вирус?</p>
+                        <p class="faq-a">Абсолютно безопасно! Это <b>PWA</b> — прогрессивное веб-приложение. Оно
+                            работает как обычный сайт, просто открывается в отдельном окне. Никаких вирусов, никакого
+                            доступа к вашим данным.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Приложение занимает много памяти?</p>
+                        <p class="faq-a">Нет! Приложение практически не занимает места — <b>менее 5 МБ</b>. Это в сотни
+                            раз меньше, чем обычные приложения.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Как удалить приложение?</p>
+                        <p class="faq-a">Так же, как любое приложение: нажмите и удерживайте иконку → <b>«Удалить»</b>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== iOS ==================== -->
+            <div class="tab-content" id="contentIOS">
+                <p class="section-title">Установка на iPhone</p>
+
+                <!-- Шаг 1 -->
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-body">
+                        <p class="step-title">Откройте ссылку в Safari</p>
+                        <p class="step-text">
+                            <b>Важно!</b> Ссылку нужно открыть именно в <b>Safari</b> — это стандартный браузер iPhone
+                            (значок компаса). Chrome, Telegram и другие приложения <b>не подойдут</b>.
+                        </p>
+                        <div class="step-visual">
+                            <i class="fa-brands fa-safari"></i>
+                            <span>Только <b>Safari</b> позволяет установить приложение на iPhone</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 1.5 — откуда скопировать -->
+                <div class="step-card">
+                    <div class="step-number">✦</div>
+                    <div class="step-body">
+                        <p class="step-title">Как открыть в Safari из Telegram / ВК / Instagram?</p>
+                        <p class="step-text">
+                            1. Нажмите на ссылку в переписке<br>
+                            2. Страница откроется внутри приложения<br>
+                            3. Нажмите на <b>три точки ⋯</b> или иконку <b>Safari</b> — выберите <b>«Открыть в
+                                Safari»</b><br>
+                            <br>
+                            Если такой кнопки нет — скопируйте ссылку и вставьте в Safari вручную.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Шаг 2 -->
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-body">
+                        <p class="step-title">Нажмите кнопку «Поделиться»</p>
+                        <p class="step-text">
+                            Внизу экрана Safari найдите иконку <b>«Поделиться»</b> —
+                            это квадрат со стрелочкой вверх.
+                        </p>
+                        <div class="step-visual highlight">
+                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                            <span>Квадрат со стрелкой вверх — <b>внизу посередине</b> экрана</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 3 -->
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-body">
+                        <p class="step-title">Выберите «На экран Домой»</p>
+                        <p class="step-text">
+                            В появившемся меню пролистайте вниз и найдите пункт
+                            <b>«На экран «Домой»»</b> (иконка <b>➕</b>). Нажмите на него.
+                        </p>
+                        <div class="step-visual">
+                            <i class="fa-solid fa-plus-square"></i>
+                            <span>Пролистайте список вниз, если не видите сразу</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 4 -->
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-body">
+                        <p class="step-title">Подтвердите — нажмите «Добавить»</p>
+                        <p class="step-text">
+                            Появится экран с названием приложения <b>«Питание»</b>.
+                            Нажмите <b>«Добавить»</b> в правом верхнем углу. Готово!
+                        </p>
+                        <div class="icon-row">
+                            <span class="icon-badge"><i class="fa-solid fa-check"></i> Готово!</span>
+                            <span class="icon-badge"><i class="fa-solid fa-mobile-screen"></i> На экране «Домой»</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Важно -->
+                <div class="note-card">
+                    <p class="note-title">💡 Совет</p>
+                    <p class="note-text">
+                        После установки открывайте приложение <b>с главного экрана</b>, а не из Safari.
+                        Тогда оно будет работать как полноценное приложение — без адресной строки, в отдельном окне.
+                    </p>
+                </div>
+
+                <!-- FAQ iOS -->
+                <div class="faq-section">
+                    <p class="section-title">Частые вопросы (iPhone)</p>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Почему только Safari? Я использую Chrome на iPhone.</p>
+                        <p class="faq-a">Apple разрешает устанавливать веб-приложения <b>только из Safari</b>. Это
+                            ограничение iPhone, к сожалению, обойти его нельзя. Chrome на iPhone не поддерживает эту
+                            функцию.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <p class="faq-q">У меня нет пункта «На экран Домой» — что делать?</p>
+                        <p class="faq-a">Пролистайте меню «Поделиться» <b>до самого низа</b>. Если кнопки нет —
+                            убедитесь, что вы открыли ссылку именно в Safari (не в Telegram / Chrome / ВК).</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Это безопасно? Это не вирус?</p>
+                        <p class="faq-a">Абсолютно безопасно! Это <b>PWA</b> — прогрессивное веб-приложение. Оно
+                            работает как обычный сайт, просто открывается в отдельном окне. Никаких вирусов, никакого
+                            доступа к вашим данным.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Приложение занимает много памяти?</p>
+                        <p class="faq-a">Нет! Менее <b>5 МБ</b>. Это меньше, чем одна фотография.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <p class="faq-q">Как удалить приложение?</p>
+                        <p class="faq-a">Нажмите и удерживайте иконку на экране «Домой» → <b>«Удалить закладку»</b>.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.getElementById('tabAndroid').classList.toggle('active', tab === 'android');
+            document.getElementById('tabIOS').classList.toggle('active', tab === 'ios');
+            document.getElementById('contentAndroid').classList.toggle('active', tab === 'android');
+            document.getElementById('contentIOS').classList.toggle('active', tab === 'ios');
+        }
+
+        // Авто-определение платформы: показать нужный таб
+        (function () {
+            const ua = navigator.userAgent || '';
+            const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            if (isIOS) {
+                switchTab('ios');
+            }
+        })();
+    </script>
+
+</body>
+
+</html>
