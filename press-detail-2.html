@@ -2,14 +2,12 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="./images/icon-192.png" />
     <link rel="manifest" href="./manifest.json" />
-    <meta name="theme-color" content="#232220" />
-    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="FitFlow" />
-    <link rel="apple-touch-icon" href="./images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Скульптор" />
+    <meta name="theme-color" content="#101010" />
+    <link rel="icon" type="image/png" href="./icon-192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FitFlow - Пресс: Тренировка 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -166,10 +164,12 @@
         });
     </script>
 
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
-    }
-  </script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker.register("./sw.js").catch(console.error);
+  });
+}
+</script>
 </body>
 </html>

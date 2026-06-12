@@ -2,15 +2,12 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="./images/icon-192.png" />
-    <!-- PWA -->
     <link rel="manifest" href="./manifest.json" />
-    <meta name="theme-color" content="#232220" />
-    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="FitFlow" />
-    <link rel="apple-touch-icon" href="./images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Скульптор" />
+    <meta name="theme-color" content="#101010" />
+    <link rel="icon" type="image/png" href="./icon-192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FitFlow - Главная</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -75,18 +72,33 @@
     
     <!-- Модальное окно для видео -->
     <div id="video-wrapper" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-        <div class="relative w-full max-w-2xl bg-card-bg rounded-4xl shadow-lg overflow-hidden">
-            <video 
-                id="main-video"
-                class="w-full h-full"
-                playsinline
-                controls
-            >
-                <source src="https://file-storage.bothelp.io/myuppy/9e/9e34/9e34cf110dca59a06f1bbe1fe1068643/%D0%B2%D1%81%D1%82%D1%83%D0%BF%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE.mp4" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
+        <div
+            class="relative w-full max-w-2xl bg-card-bg rounded-4xl shadow-lg overflow-hidden max-h-[85vh] flex flex-col">
+            <div class="overflow-y-auto p-4 space-y-4">
+                <div class="text-center space-y-1">
+                    <p class="text-red-500 font-bold uppercase text-sm">Эти 2 видео обязательны к просмотру</p>
+                    <h3 class="text-lg font-bold text-dark-charcoal">Видео 1</h3>
+                </div>
+                <video id="main-video" class="w-full rounded-3xl" playsinline controls>
+                    <source
+                        src="https://file-storage.bothelp.io/myuppy/9e/9e34/9e34cf110dca59a06f1bbe1fe1068643/%D0%B2%D1%81%D1%82%D1%83%D0%BF%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE.mp4"
+                        type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+
+                <div class="text-center pt-2">
+                    <h3 class="text-lg font-bold text-dark-charcoal">Видео 2</h3>
+                </div>
+                <video class="w-full rounded-3xl" playsinline controls>
+                    <source
+                        src="https://file-storage.bothelp.io/myuppy/75/7592/759279c47e0e4b1fac06622e87f7d4a2/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F.mp4"
+                        type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
         </div>
     </div>
+
 
     <!-- Модальное окно для приветствия -->
     <div id="welcome-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
@@ -96,17 +108,18 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <h1 class="text-2xl font-bold text-center">Добро пожаловать в вашу трансформацию!</h1>
+            <h1 class="text-2xl font-bold text-center">Добро пожаловать в программу “Скульптор”.</h1>
 
-            <p class="text-text-secondary">Хватит откладывать мечту о стройном, энергичном теле на потом — <strong class="text-dark-charcoal">начни изменения прямо сейчас!</strong></p>
+<p class="text-text-secondary">Эта программа создана не только ради «красивой талии» или «подтянутых бёдер», но и для силы и баланса тела в целом.</p>
 
-            <p class="text-sm text-text-secondary bg-gray-100 p-3 rounded-2xl border border-black/5">Программы созданы <strong class="text-dark-charcoal">Натальей Макаренко</strong> — тренером, который на собственном примере доказал: возраст — просто цифра, и результат возможен в любом возрасте.</p>
+<p class="text-sm text-text-secondary bg-gray-100 p-3 rounded-2xl border border-black/5">Здесь я не буду «учить» — я поделюсь собранными за годы тренировок упражнениями, которые действительно сработали для меня.</p>
 
-            <p class="text-text-secondary">Каждая тренировка — концентрат эффективных упражнений, проверенных сотнями женщин. Все видео-комплексы адаптированы — <strong class="text-dark-charcoal">не нужно никакого зала, сверхинвентаря или опыта.</strong></p>
+<p class="text-text-secondary">Всего несколько регулярных занятий в неделю дадут ощутимый результат — подтянутое тело, красивый силуэт, уверенную походку и ощущение внутренней силы.</p>
 
-            <p class="text-text-secondary">В программе акцент — не только на рельеф тела, но и на <strong class="text-dark-charcoal">здоровье, красоту, осанку и уверенность.</strong></p>
+<p class="text-text-secondary">А сбалансированное питание, которое вы можете приобрести на моем сайте дополнительно, поможет поддерживать вес или снизить его, если в этом есть необходимость. </p>
 
-            <p class="font-bold text-center pt-2">Начни сегодня — идеальный момент настал!</p>
+<p class="font-bold text-center pt-2">Начинаем путь к себе — шаг за шагом, осознанно и красиво!</p>
+
         </div>
     </div>
 
@@ -191,10 +204,12 @@
 
 
 
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
-    }
-  </script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker.register("./sw.js").catch(console.error);
+  });
+}
+</script>
 </body>
 </html>

@@ -1,20 +1,10 @@
-// FitFlow PWA Service Worker
-// ⚠️ При каждом обновлении index.html — инкрементируй версию: v1 → v2 → v3
-const CACHE_NAME = 'fitflow-pwa-v1';
+const CACHE_NAME = 'sculptor-pwa-v1';
+const EXPIRY_DATE = new Date('2026-09-09T00:00:00').getTime(); // 180 дней от 13 марта 2026
 
-// Количество дней доступа с момента установки
-const ACCESS_DAYS = 90;
-
-// ─────────────────────────────────────────────
-// INSTALL — сохраняем ключевые файлы в кеш
-// ─────────────────────────────────────────────
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// ─────────────────────────────────────────────
-// ACTIVATE — удаляем старые кеши
-// ─────────────────────────────────────────────
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(cacheNames =>
@@ -28,131 +18,101 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// ─────────────────────────────────────────────
-// FETCH — network-first + проверка 90 дней
-// ─────────────────────────────────────────────
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Пропускаем: внешние CDN, видео bothelp, не-http
-  if (!url.protocol.startsWith('http')) return;
-  if (url.hostname !== self.location.hostname) return;
+  // НЕ кешируй видео с BotHelp и внешние ресурсы
+  if (url.hostname.includes('bothelp') || !url.protocol.startsWith('http')) {
+    return;
+  }
 
   event.respondWith(
     (async () => {
-      // ── Проверка 90-дневного доступа ─────────────────
-      // Дата первой установки хранится в IndexedDB-like через Cache Storage
-      const metaCache = await caches.open('fitflow-meta');
-      const metaReq   = new Request('fitflow-install-date');
-      let installDate = null;
+      const now = Date.now();
 
-      const metaRes = await metaCache.match(metaReq);
-      if (metaRes) {
-        const data = await metaRes.json();
-        installDate = data.date;
-      } else {
-        // Первый запуск — сохраняем дату установки
-        installDate = Date.now();
-        await metaCache.put(
-          metaReq,
-          new Response(JSON.stringify({ date: installDate }), {
-            headers: { 'Content-Type': 'application/json' }
-          })
-        );
-      }
-
-      const daysPassed = (Date.now() - installDate) / (1000 * 60 * 60 * 24);
-
-      if (daysPassed >= ACCESS_DAYS) {
-        // ── Доступ истёк — показываем заглушку ───────
+      // Проверка: прошло ли время блокировки
+      if (now >= EXPIRY_DATE) {
         return new Response(
           `<!DOCTYPE html>
-          <html lang="ru">
+          <html>
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Программа завершена</title>
+            <title>Скульптор — завершён</title>
             <style>
-              * { box-sizing: border-box; margin: 0; padding: 0; }
               body {
-                min-height: 100vh;
+                margin: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: linear-gradient(160deg, #1a1820 0%, #232220 60%, #1c1e1a 100%);
+                min-height: 100vh;
+                background: linear-gradient(135deg, #b4f24c 0%, #3bd45b 100%);
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 color: #fff;
-                padding: 2rem;
               }
-              .card {
+              .container {
                 text-align: center;
-                max-width: 360px;
-                width: 100%;
-              }
-              .emoji {
-                font-size: 4.5rem;
-                margin-bottom: 1.5rem;
-                animation: bounce 2s ease-in-out infinite;
-                display: block;
+                padding: 2rem;
+                max-width: 500px;
               }
               h1 {
-                font-size: 1.75rem;
-                font-weight: 800;
-                margin-bottom: 1rem;
-                letter-spacing: -0.02em;
+                font-size: 2.5rem;
+                margin: 0 0 1rem;
+                color: #1a1a1a;
+                animation: fadeIn 1s ease-out;
               }
               p {
-                font-size: 1rem;
-                color: rgba(255,255,255,0.65);
+                font-size: 1.2rem;
+                color: rgba(0,0,0,0.75);
                 line-height: 1.6;
+                animation: fadeIn 1.5s ease-out;
               }
-              .badge {
-                display: inline-block;
-                margin-top: 2rem;
-                padding: 0.5rem 1.25rem;
-                background: rgba(255,255,255,0.08);
-                border: 1px solid rgba(255,255,255,0.15);
-                border-radius: 30px;
-                font-size: 0.85rem;
-                color: rgba(255,255,255,0.5);
+              .emoji {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+                animation: bounce 2s infinite;
+              }
+              @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
               }
               @keyframes bounce {
                 0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-14px); }
+                50% { transform: translateY(-20px); }
               }
             </style>
           </head>
           <body>
-            <div class="card">
-              <span class="emoji">🏆</span>
-              <h1>90 дней пройдено!</h1>
-              <p>Вы прошли полную программу FitFlow.<br>Поздравляем с результатом!</p>
-              <div class="badge">Доступ был открыт 90 дней</div>
+            <div class="container">
+              <div class="emoji">🎉</div>
+              <h1>Поздравляем!</h1>
+              <p>Вы успешно завершили программу «Скульптор»!</p>
+              <p style="font-size: 0.9rem; margin-top: 2rem; opacity: 0.7;">
+                Доступ закрыт 9 сентября 2026
+              </p>
             </div>
           </body>
           </html>`,
           {
-            status: 200,
+            status: 403,
             headers: { 'Content-Type': 'text/html; charset=utf-8' }
           }
         );
       }
 
-      // ── Доступ активен — network-first ────────────
+      // До истечения срока — работай нормально
       try {
         const response = await fetch(event.request);
         if (response.status === 200 && event.request.method === 'GET') {
-          const clone = response.clone();
+          const responseClone = response.clone();
           const cache = await caches.open(CACHE_NAME);
-          cache.put(event.request, clone);
+          cache.put(event.request, responseClone);
         }
         return response;
-      } catch {
-        // Офлайн — отдаём из кеша
+      } catch (error) {
         const cached = await caches.match(event.request);
         if (cached) return cached;
-        // Fallback на главную
-        return caches.match('./index.html');
+        throw error;
       }
     })()
   );
