@@ -1,73 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="manifest" href="./manifest.json" />
-    <link rel="apple-touch-icon" href="./icon-192.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Скульптор" />
-    <meta name="theme-color" content="#101010" />
-    <link rel="icon" type="image/png" href="./icon-192.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FitFlow - Начать</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'app-bg': '#cfc7b8',
-              'card-bg': '#fefdfb',
-              'dark-charcoal': '#232220',
-              'text-secondary': '#6B7280',
-              'accent-purple': '#f0c7ff',
-              'accent-green': '#e7fcbb',
-              'accent-beige': '#d5cdbe',
-            },
-            borderRadius: {
-              '4xl': '2rem',
-              '5xl': '2.5rem',
-            },
-            animation: {
-              'ken-burns': 'ken-burns 20s ease-out infinite',
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              'ken-burns': {
-                '0%': { transform: 'scale(1) translate(0, 0)' },
-                '50%': { transform: 'scale(1.1) translate(-2%, 2%)' },
-                '100%': { transform: 'scale(1) translate(0, 0)' },
-              },
-            }
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Скульптор" />
+  <meta name="theme-color" content="#101010" />
+  <link rel="icon" type="image/png" href="./icon-192.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitFlow - Начать</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'app-bg': '#cfc7b8',
+            'card-bg': '#fefdfb',
+            'dark-charcoal': '#232220',
+            'text-secondary': '#6B7280',
+            'accent-purple': '#f0c7ff',
+            'accent-green': '#e7fcbb',
+            'accent-beige': '#d5cdbe',
           },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem',
+          },
+          animation: {
+            'ken-burns': 'ken-burns 20s ease-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            'ken-burns': {
+              '0%': { transform: 'scale(1) translate(0, 0)' },
+              '50%': { transform: 'scale(1.1) translate(-2%, 2%)' },
+              '100%': { transform: 'scale(1) translate(0, 0)' },
+            },
+          }
         },
-      }
-    </script>
-<link rel="stylesheet" href="./index.css">
+      },
+    }
+  </script>
+  <link rel="stylesheet" href="./index.css">
 </head>
+
 <body class="bg-dark-charcoal">
 
-    <div class="relative h-screen w-screen max-w-2xl mx-auto overflow-hidden">
-        <!-- Фоновое изображение с анимацией -->
-        <div class="absolute inset-0">
-            <img src="./images/natali.JPG" alt="Background" class="w-full h-full object-cover animate-ken-burns">
-        </div>
-
-        <!-- Градиент для затемнения -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
-
-        <!-- Контент -->
-        <div class="relative z-10 flex flex-col items-center justify-end h-full p-8 text-center text-white">
-            <h1 class="text-4xl font-bold drop-shadow-lg mb-">СКУЛЬПТОР</h1>
-            <p class="text-lg mb-10 drop-shadow-md">ЯГОДИЦЫ И ПРЕСС</p>
-            <p class="text-lg mb-8 drop-shadow-md">Ваш путь к идеальной фигуре начинается здесь</p>
-            <a href="./main.html" class="w-full max-w-xs bg-[#e7fcbb] text-dark-charcoal font-bold py-4 px-8 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 animate-pulse-slow">
-                Старт
-            </a>
-        </div>
+  <div class="relative h-screen w-screen max-w-2xl mx-auto overflow-hidden">
+    <!-- Фоновое изображение с анимацией -->
+    <div class="absolute inset-0">
+      <img src="./images/natali.JPG" alt="Background" class="w-full h-full object-cover animate-ken-burns">
     </div>
+
+    <!-- Градиент для затемнения -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+
+    <!-- Контент -->
+    <div class="relative z-10 flex flex-col items-center justify-end h-full p-8 text-center text-white">
+      <h1 class="text-4xl font-bold drop-shadow-lg mb-">СКУЛЬПТОР</h1>
+      <p class="text-lg mb-10 drop-shadow-md">ЯГОДИЦЫ И ПРЕСС</p>
+      <p class="text-lg mb-8 drop-shadow-md">Ваш путь к идеальной фигуре начинается здесь</p>
+      <a href="./main.html"
+        class="w-full max-w-xs bg-[#e7fcbb] text-dark-charcoal font-bold py-4 px-8 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 animate-pulse-slow">
+        Старт
+      </a>
+    </div>
+  </div>
 
   <!-- ===== PWA INSTALL OVERLAY ===== -->
   <div id="pwa-install-overlay" style="
@@ -84,7 +86,8 @@
     text-align: center;
     padding: 2rem;
   ">
-    <img src="./icon-192.png" alt="Скульптор" style="width:96px;height:96px;border-radius:22px;margin-bottom:1.5rem;box-shadow:0 8px 32px rgba(231,252,187,0.2);">
+    <img src="./icon-192.png" alt="Скульптор"
+      style="width:96px;height:96px;border-radius:22px;margin-bottom:1.5rem;box-shadow:0 8px 32px rgba(231,252,187,0.2);">
     <h1 style="font-size:1.8rem;font-weight:700;margin:0 0 0.5rem;">Скульптор</h1>
     <p style="font-size:1rem;color:#a0a0a0;margin:0 0 2rem;">ЯГОДИЦЫ И ПРЕСС</p>
 
@@ -96,14 +99,17 @@
         cursor:pointer;margin-bottom:1rem;box-shadow:0 4px 20px rgba(231,252,187,0.3);
       ">&#11015; Установить приложение</button>
       <p id="pwa-no-prompt-hint" style="display:none;font-size:0.85rem;color:#777;line-height:1.6;">
-        Найдите значок <strong>⊞</strong> или <strong>⋮</strong> в адресной строке Chrome и нажмите <strong>«Установить»</strong>
+        Найдите значок <strong>⊞</strong> или <strong>⋮</strong> в адресной строке Chrome и нажмите
+        <strong>«Установить»</strong>
       </p>
     </div>
 
     <!-- iOS Safari -->
     <div id="pwa-ios-safari" style="display:none;max-width:320px;">
-      <p style="font-size:1rem;color:#e7fcbb;font-weight:600;margin-bottom:1rem;">Установите приложение на экран Домой:</p>
-      <div style="background:#1e1e1e;border-radius:16px;padding:1.2rem;text-align:left;line-height:2;font-size:0.95rem;">
+      <p style="font-size:1rem;color:#e7fcbb;font-weight:600;margin-bottom:1rem;">Установите приложение на экран Домой:
+      </p>
+      <div
+        style="background:#1e1e1e;border-radius:16px;padding:1.2rem;text-align:left;line-height:2;font-size:0.95rem;">
         <div>1. Нажмите <strong style="color:#e7fcbb;">&#x1F4E4; Поделиться</strong> внизу экрана</div>
         <div>2. Выберите <strong style="color:#e7fcbb;">«На экран &ldquo;Домой&rdquo;»</strong></div>
         <div>3. Нажмите <strong style="color:#e7fcbb;">«Добавить»</strong></div>
@@ -138,7 +144,8 @@
         font-size:1.1rem;font-weight:700;border-radius:16px;text-decoration:none;
         box-shadow:0 4px 20px rgba(231,252,187,0.3);margin-bottom:1rem;
       ">&#x1F9ED; Открыть в Chrome</a>
-      <p style="font-size:0.85rem;color:#777;line-height:1.6;margin:0;">Если кнопка не сработала — скопируйте ссылку и вставьте в Chrome вручную</p>
+      <p style="font-size:0.85rem;color:#777;line-height:1.6;margin:0;">Если кнопка не сработала — скопируйте ссылку и
+        вставьте в Chrome вручную</p>
     </div>
 
     <!-- Desktop non-Chrome -->
@@ -149,7 +156,8 @@
         font-size:1.1rem;font-weight:700;border:none;border-radius:16px;
         cursor:pointer;box-shadow:0 4px 20px rgba(231,252,187,0.3);
       ">&#x1F4CB; Скопировать ссылку</button>
-      <p id="pwa-copy-success" style="display:none;margin-top:0.8rem;color:#e7fcbb;font-size:0.9rem;">Ссылка скопирована! Откройте в Chrome.</p>
+      <p id="pwa-copy-success" style="display:none;margin-top:0.8rem;color:#e7fcbb;font-size:0.9rem;">Ссылка
+        скопирована! Откройте в Chrome.</p>
     </div>
 
     <!-- Desktop Chrome -->
@@ -166,118 +174,175 @@
   </div>
 
   <script>
-  (function() {
-    // ===== SERVICE WORKER =====
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(console.error);
-      });
-    }
-
-    // ===== PWA INSTALL LOGIC =====
-    const overlay = document.getElementById('pwa-install-overlay');
-    let deferredPrompt = null;
-
-    const ua = navigator.userAgent;
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-      || window.navigator.standalone === true;
-
-    // Если уже установлено — не показываем overlay
-    if (isStandalone) return;
-
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-    const isAndroid = /Android/i.test(ua);
-    const isChrome = /Chrome/i.test(ua) && !/Chromium|Edge|YaBrowser|OPR|Opera|SamsungBrowser|Firefox/i.test(ua);
-    const isSafari = /Safari/i.test(ua) && !/Chrome/i.test(ua);
-    const isWebView = /FBAN|FBAV|Instagram|VKShare|vk_webview|TelegramWebview|WebView|(wv)/i.test(ua);
-    const isDesktop = !isIOS && !isAndroid;
-
-    // Показываем overlay
-    overlay.style.display = 'flex';
-
-    function showPanel(id) {
-      ['pwa-android-chrome','pwa-ios-safari','pwa-ios-webview','pwa-android-webview','pwa-android-other','pwa-desktop-other','pwa-desktop-chrome']
-        .forEach(p => document.getElementById(p).style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-
-    window.addEventListener('beforeinstallprompt', e => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
-
-    if (isIOS) {
-      if (isWebView) {
-        showPanel('pwa-ios-webview');
-        const safariBtnEl = document.getElementById('pwa-open-safari-btn');
-        safariBtnEl.href = 'x-safari-https://' + location.host + location.pathname;
-      } else {
-        showPanel('pwa-ios-safari'); // Safari или другой браузер iOS
-      }
-    } else if (isAndroid) {
-      if (isWebView) {
-        showPanel('pwa-android-webview');
-        const chromeBtnEl = document.getElementById('pwa-open-chrome-btn');
-        chromeBtnEl.href = 'intent://' + location.host + location.pathname + '#Intent;scheme=https;package=com.android.chrome;end';
-      } else if (!isChrome) {
-        // Android, но не Chrome (Firefox, Opera, Samsung, Яндекс и т.д.)
-        showPanel('pwa-android-other');
-        const chromeAndroidBtn = document.getElementById('pwa-open-chrome-android-btn');
-        const intentUrl = 'intent://' + location.host + location.pathname +
-          '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' +
-          encodeURIComponent(location.href) + ';end';
-        chromeAndroidBtn.href = intentUrl;
-        // Если intent не сработал — через 3 сек показать подсказку
-        chromeAndroidBtn.addEventListener('click', () => {
-          setTimeout(() => {
-            // ничего не делаем, подсказка уже видна
-          }, 2500);
-        });
-      } else {
-        // Android Chrome
-        showPanel('pwa-android-chrome');
-        setTimeout(() => {
-          if (!deferredPrompt) {
-            document.getElementById('pwa-no-prompt-hint').style.display = 'block';
-            document.getElementById('pwa-install-btn').style.display = 'none';
-          }
-        }, 1500);
-        document.getElementById('pwa-install-btn').addEventListener('click', async () => {
-          if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') overlay.style.display = 'none';
-            deferredPrompt = null;
-          }
-        });
-      }
-    } else {
-      // Desktop
-      if (isChrome) {
-        showPanel('pwa-desktop-chrome');
-        setTimeout(() => {
-          if (!deferredPrompt) {
-            document.getElementById('pwa-desktop-no-prompt').style.display = 'block';
-            document.getElementById('pwa-desktop-install-btn').style.display = 'none';
-          }
-        }, 1500);
-        document.getElementById('pwa-desktop-install-btn').addEventListener('click', async () => {
-          if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') overlay.style.display = 'none';
-            deferredPrompt = null;
-          }
-        });
-      } else {
-        showPanel('pwa-desktop-other');
-        document.getElementById('pwa-copy-link-btn').addEventListener('click', () => {
-          navigator.clipboard.writeText(location.href).then(() => {
-            document.getElementById('pwa-copy-success').style.display = 'block';
+      (function () {
+        // ===== SERVICE WORKER =====
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(console.error);
           });
+        }
+
+        // ===== PWA INSTALL LOGIC =====
+        const overlay = document.getElementById('pwa-install-overlay');
+        let deferredPrompt = null;
+
+        const ua = navigator.userAgent;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+          || window.navigator.standalone === true;
+
+        // Если уже установлено — не показываем overlay
+        if (isStandalone) return;
+
+        const isIOS = /iPhone|iPad|iPod/i.test(ua);
+        const isAndroid = /Android/i.test(ua);
+        const isChrome = /Chrome/i.test(ua) && !/Chromium|Edge|YaBrowser|OPR|Opera|SamsungBrowser|Firefox/i.test(ua);
+        const isSafari = /Safari/i.test(ua) && !/Chrome/i.test(ua);
+
+        // Расширенное определение WebView / встроенных браузеров
+        // Telegram на Android использует свой браузер (не обязательно с TelegramWebview в UA)
+        // Также ловим: Telegram, VK, Instagram, Facebook, другие in-app browsers
+        const isWebView = (
+          /FBAN|FBAV|Instagram|VKShare|vk_webview|TelegramWebview|WebView/i.test(ua) ||
+          /\(wv\)/i.test(ua) ||
+          // Telegram на Android: нет стандартных браузерных маркеров, но есть специфика
+          (/Telegram/i.test(ua)) ||
+          // Если нет стандартных маркеров браузера на мобильном — скорее всего WebView
+          (isAndroid && /Version\/\d/i.test(ua) && !/SamsungBrowser/i.test(ua) && !/Chrome/i.test(ua)) ||
+          // iOS: если нет Safari/Chrome — WebView
+          (isIOS && !isSafari && !/CriOS|FxiOS|OPiOS|EdgiOS/i.test(ua))
+        );
+        const isDesktop = !isIOS && !isAndroid;
+
+        const currentUrl = location.href;
+        const currentHost = location.host;
+        const currentPath = location.pathname + location.search;
+
+        // Показываем overlay
+        overlay.style.display = 'flex';
+
+        function showPanel(id) {
+          ['pwa-android-chrome', 'pwa-ios-safari', 'pwa-ios-webview', 'pwa-android-webview', 'pwa-android-other', 'pwa-desktop-other', 'pwa-desktop-chrome']
+            .forEach(p => document.getElementById(p).style.display = 'none');
+          document.getElementById(id).style.display = 'block';
+        }
+
+        // Функция открытия в Chrome на Android через intent://
+        function openInChromeAndroid(fallbackUrl) {
+          const url = fallbackUrl || currentUrl;
+          const host = (new URL(url)).host;
+          const pathAndQuery = (new URL(url)).pathname + (new URL(url)).search;
+          // Сначала пробуем intent:// — работает во многих браузерах включая Telegram
+          const intentUrl = 'intent://' + host + pathAndQuery +
+            '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' +
+            encodeURIComponent(url) + ';end';
+          location.href = intentUrl;
+        }
+
+        // Функция открытия в Safari на iOS
+        function openInSafariIOS() {
+          // Метод 1: Universal Link через custom URL scheme (работает в большинстве WebView)
+          // Метод 2: Просто открыть текущий URL — некоторые WebView предложат открыть в Safari
+          // Используем комбинацию подходов
+          const url = currentUrl;
+          // Попытка через javascript bridge или прямой редирект
+          // В Telegram iOS: tg://resolve не помогает, используем location.replace
+          try {
+            // Пробуем открыть в Safari через x-safari (работает в некоторых браузерах)
+            window.open('x-safari-' + url, '_blank');
+          } catch (e) { }
+        }
+
+        window.addEventListener('beforeinstallprompt', e => {
+          e.preventDefault();
+          deferredPrompt = e;
         });
-      }
-    }
-  })();
+
+        if (isIOS) {
+          if (isWebView) {
+            showPanel('pwa-ios-webview');
+            const safariBtnEl = document.getElementById('pwa-open-safari-btn');
+            // x-safari-https:// работает в некоторых WebView, но не во всех
+            // В Telegram iOS лучше использовать javascript:void() + window.open
+            safariBtnEl.addEventListener('click', function (e) {
+              e.preventDefault();
+              // Попытка 1: x-safari URL scheme
+              const xSafariUrl = 'x-safari-' + currentUrl;
+              location.href = xSafariUrl;
+              // Попытка 2: через window.open с задержкой (если первая не сработала)
+              setTimeout(function () {
+                window.open(currentUrl, '_system');
+              }, 300);
+            });
+          } else {
+            showPanel('pwa-ios-safari'); // Safari или другой браузер iOS
+          }
+        } else if (isAndroid) {
+          if (isWebView) {
+            showPanel('pwa-android-webview');
+            const chromeBtnEl = document.getElementById('pwa-open-chrome-btn');
+            // Убираем href, обрабатываем через click для надёжности
+            chromeBtnEl.removeAttribute('href');
+            chromeBtnEl.style.cursor = 'pointer';
+            chromeBtnEl.addEventListener('click', function (e) {
+              e.preventDefault();
+              openInChromeAndroid(currentUrl);
+            });
+          } else if (!isChrome) {
+            // Android, но не Chrome (Firefox, Opera, Samsung, Яндекс и т.д.)
+            showPanel('pwa-android-other');
+            const chromeAndroidBtn = document.getElementById('pwa-open-chrome-android-btn');
+            chromeAndroidBtn.removeAttribute('href');
+            chromeAndroidBtn.style.cursor = 'pointer';
+            chromeAndroidBtn.addEventListener('click', function (e) {
+              e.preventDefault();
+              openInChromeAndroid(currentUrl);
+            });
+          } else {
+            // Android Chrome
+            showPanel('pwa-android-chrome');
+            setTimeout(() => {
+              if (!deferredPrompt) {
+                document.getElementById('pwa-no-prompt-hint').style.display = 'block';
+                document.getElementById('pwa-install-btn').style.display = 'none';
+              }
+            }, 1500);
+            document.getElementById('pwa-install-btn').addEventListener('click', async () => {
+              if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') overlay.style.display = 'none';
+                deferredPrompt = null;
+              }
+            });
+          }
+        } else {
+          // Desktop
+          if (isChrome) {
+            showPanel('pwa-desktop-chrome');
+            setTimeout(() => {
+              if (!deferredPrompt) {
+                document.getElementById('pwa-desktop-no-prompt').style.display = 'block';
+                document.getElementById('pwa-desktop-install-btn').style.display = 'none';
+              }
+            }, 1500);
+            document.getElementById('pwa-desktop-install-btn').addEventListener('click', async () => {
+              if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') overlay.style.display = 'none';
+                deferredPrompt = null;
+              }
+            });
+          } else {
+            showPanel('pwa-desktop-other');
+            document.getElementById('pwa-copy-link-btn').addEventListener('click', () => {
+              navigator.clipboard.writeText(location.href).then(() => {
+                document.getElementById('pwa-copy-success').style.display = 'block';
+              });
+            });
+          }
+        }
+      })();
   </script>
+
 </html>
