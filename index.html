@@ -130,6 +130,17 @@
       ">&#x1F9ED; Открыть в Chrome</a>
     </div>
 
+    <!-- Android Other Browser (Firefox/Opera/Samsung/Яндекс) -->
+    <div id="pwa-android-other" style="display:none;max-width:320px;">
+      <p style="font-size:1rem;color:#a0a0a0;margin-bottom:1.2rem;">Для установки откройте сайт в Chrome:</p>
+      <a id="pwa-open-chrome-android-btn" href="#" style="
+        display:block;width:100%;padding:1rem 2rem;background:#e7fcbb;color:#232220;
+        font-size:1.1rem;font-weight:700;border-radius:16px;text-decoration:none;
+        box-shadow:0 4px 20px rgba(231,252,187,0.3);margin-bottom:1rem;
+      ">&#x1F9ED; Открыть в Chrome</a>
+      <p style="font-size:0.85rem;color:#777;line-height:1.6;margin:0;">Если кнопка не сработала — скопируйте ссылку и вставьте в Chrome вручную</p>
+    </div>
+
     <!-- Desktop non-Chrome -->
     <div id="pwa-desktop-other" style="display:none;max-width:320px;">
       <p style="font-size:1rem;color:#a0a0a0;margin-bottom:1.2rem;">Откройте ссылку в Google Chrome для установки:</p>
@@ -176,7 +187,7 @@
 
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const isAndroid = /Android/i.test(ua);
-    const isChrome = /Chrome/i.test(ua) && !/Chromium|Edge/i.test(ua);
+    const isChrome = /Chrome/i.test(ua) && !/Chromium|Edge|YaBrowser|OPR|Opera|SamsungBrowser|Firefox/i.test(ua);
     const isSafari = /Safari/i.test(ua) && !/Chrome/i.test(ua);
     const isWebView = /FBAN|FBAV|Instagram|VKShare|vk_webview|TelegramWebview|WebView|(wv)/i.test(ua);
     const isDesktop = !isIOS && !isAndroid;
@@ -185,7 +196,7 @@
     overlay.style.display = 'flex';
 
     function showPanel(id) {
-      ['pwa-android-chrome','pwa-ios-safari','pwa-ios-webview','pwa-android-webview','pwa-desktop-other','pwa-desktop-chrome']
+      ['pwa-android-chrome','pwa-ios-safari','pwa-ios-webview','pwa-android-webview','pwa-android-other','pwa-desktop-other','pwa-desktop-chrome']
         .forEach(p => document.getElementById(p).style.display = 'none');
       document.getElementById(id).style.display = 'block';
     }
@@ -208,7 +219,22 @@
         showPanel('pwa-android-webview');
         const chromeBtnEl = document.getElementById('pwa-open-chrome-btn');
         chromeBtnEl.href = 'intent://' + location.host + location.pathname + '#Intent;scheme=https;package=com.android.chrome;end';
+      } else if (!isChrome) {
+        // Android, но не Chrome (Firefox, Opera, Samsung, Яндекс и т.д.)
+        showPanel('pwa-android-other');
+        const chromeAndroidBtn = document.getElementById('pwa-open-chrome-android-btn');
+        const intentUrl = 'intent://' + location.host + location.pathname +
+          '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' +
+          encodeURIComponent(location.href) + ';end';
+        chromeAndroidBtn.href = intentUrl;
+        // Если intent не сработал — через 3 сек показать подсказку
+        chromeAndroidBtn.addEventListener('click', () => {
+          setTimeout(() => {
+            // ничего не делаем, подсказка уже видна
+          }, 2500);
+        });
       } else {
+        // Android Chrome
         showPanel('pwa-android-chrome');
         setTimeout(() => {
           if (!deferredPrompt) {
